@@ -8,6 +8,20 @@
 #include "esp_http_client.h"
 #include "esp_log.h"
 
+/* Fallbacks, falls die Optionen nicht in der Projekt-Kconfig definiert sind */
+#ifndef CONFIG_IPP_PRINTER_HOST
+#define CONFIG_IPP_PRINTER_HOST "192.168.0.200"
+#endif
+#ifndef CONFIG_IPP_PRINTER_PORT
+#define CONFIG_IPP_PRINTER_PORT 631
+#endif
+#ifndef CONFIG_IPP_PRINTER_PATH
+#define CONFIG_IPP_PRINTER_PATH "/ipp/print"
+#endif
+#ifndef CONFIG_IPP_MEDIA
+#define CONFIG_IPP_MEDIA ""
+#endif
+
 static const char *TAG = "ipp";
 
 #define IPP_HDR_MAX   768
@@ -239,17 +253,14 @@ esp_err_t ipp_print_jpeg(const ipp_config_t *cfg, const uint8_t *jpeg, size_t le
     w8(&b, TAG_END_OF_ATTRS);
     if (b.overflow) return ESP_ERR_NO_MEM;
 
-    uint8_t resp[512];
+    static uint8_t resp[1024];
     size_t rlen;
     uint16_t st;
     ESP_LOGI(TAG, "Sende %u Bytes JPEG an %s ...", (unsigned)len, c.host);
     esp_err_t err = do_request(&c, hdr, b.len, jpeg, len, resp, sizeof(resp), &rlen, &st);
     if (err != ESP_OK) return err;
 
-    ESP_LOGI(TAG, "IPP-Status 0x%04X", st);
-    if (st >= 0x0100) {
-        log_printable(resp, rlen);
-        return ESP_FAIL;
-    }
-    return ESP_OK;
+    ESP_LOGI(TAG, "IPP-Status 0x%04X, Antwort des Druckers:", st);
+    log_printable(resp, rlen);   /* job-id, job-state, job-state-reasons ... */
+    return st < 0x0100 ? ESP_OK : ESP_FAIL;
 }
