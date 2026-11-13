@@ -1,0 +1,17 @@
+menu "Photobooth"
+
+    config PHOTOBOOTH_WIFI_SSID
+        string "WLAN SSID"
+        default ""
+
+    config PHOTOBOOTH_WIFI_PASSWORD
+        string "WLAN Passwort"
+        default ""
+
+    config PHOTOBOOTH_PRINT_TEST
+        bool "Beim Start test.jpg drucken"
+        default n
+        help
+            Aus: es wird nur der Druckerstatus abgefragt.
+
+endmenu
