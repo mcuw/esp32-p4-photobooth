@@ -2,7 +2,7 @@
 ESP-IDF v6.1, Ziel: esp32p4
 
     idf.py set-target esp32p4
-    idf.py menuconfig     # Photobooth: WLAN; IPP Client: Drucker-IP (Standard 192.168.50.200)
+    idf.py menuconfig     # Photobooth: WLAN; IPP Client: Drucker-IP (Standard 192.168.0.200)
     idf.py build flash monitor
 
 main/test.jpg ist nur ein Platzhalter -> durch echtes Baseline-JPEG ersetzen

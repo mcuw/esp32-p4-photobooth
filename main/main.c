@@ -49,6 +49,11 @@ static void wifi_start(void)
     strlcpy((char *)wc.sta.ssid, CONFIG_PHOTOBOOTH_WIFI_SSID, sizeof(wc.sta.ssid));
     strlcpy((char *)wc.sta.password, CONFIG_PHOTOBOOTH_WIFI_PASSWORD, sizeof(wc.sta.password));
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
+
+    wc.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK;
+    wc.sta.pmf_cfg.capable = true;
+    wc.sta.pmf_cfg.required = false;
+
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wc));
     ESP_ERROR_CHECK(esp_wifi_start());
 
@@ -71,7 +76,7 @@ void app_main(void)
     ESP_LOGI(TAG, "Get-Printer-Attributes: %s", esp_err_to_name(e));
 
 #if CONFIG_PHOTOBOOTH_PRINT_TEST
-    /* 2) Testdruck. Zur Laufzeit andere IP: ipp_config_t c = { .host = "192.168.50.201" }; */
+    /* 2) Testdruck. Zur Laufzeit andere IP: ipp_config_t c = { .host = "192.168.0.201" }; */
     e = ipp_print_jpeg(NULL, test_jpg_start, test_jpg_end - test_jpg_start, "esp32-test");
     ESP_LOGI(TAG, "Print-Job: %s", esp_err_to_name(e));
 #endif

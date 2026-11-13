@@ -1,0 +1,32 @@
+# This file was generated using idf.py save-defconfig or menuconfig [D] key. It can be edited manually.
+# you can also create a sdkconfig.local and set your config. The file is ignored by git.
+#
+# default:
+# CONFIG_PHOTOBOOTH_PRINT_TEST=n
+CONFIG_ESP32P4_SELECTS_REV_LESS_V3=y
+
+# ---- Ziel / Flash ----
+CONFIG_IDF_TARGET="esp32p4"
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
+CONFIG_SPI_FLASH_SUPPORT_BOYA_CHIP=y
+
+# ---- Partitionen ----
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+CONFIG_PARTITION_TABLE_FILENAME="partitions.csv"
+
+# ---- PSRAM (32 MB am Guition-Board) ----
+CONFIG_SPIRAM=y
+
+# ---- Chip-Revision v1.0 ----
+# TODO: Zeile zur Mindestrevision hier einfuegen (aus "idf.py save-defconfig"
+# bzw. menuconfig: Component config -> Hardware Settings -> Chip revision).
+
+# ---- ESP-Hosted (SDIO zum C6) ----
+# TODO: Hosted-Pins/Optionen aus "idf.py save-defconfig" uebernehmen
+# (laut Log: SDIO 4-bit, CLK=18 CMD=19 D0..D3=14..17, RESET=54).
+
+# WLAN-Zugangsdaten NICHT hier, sondern in sdkconfig.local (nicht im Git):
+#   CONFIG_PHOTOBOOTH_WIFI_SSID="..."
+#   CONFIG_PHOTOBOOTH_WIFI_PASSWORD="..."
