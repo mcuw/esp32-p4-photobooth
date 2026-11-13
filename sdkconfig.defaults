@@ -4,6 +4,7 @@
 # default:
 # CONFIG_PHOTOBOOTH_PRINT_TEST=n
 CONFIG_ESP32P4_SELECTS_REV_LESS_V3=y
+CONFIG_IPP_MEDIA="jpn_hagaki_100x148mm"
 
 # ---- Ziel / Flash ----
 CONFIG_IDF_TARGET="esp32p4"

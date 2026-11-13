@@ -34,7 +34,7 @@ menu "Photobooth"
 
         config IPP_MEDIA
             string "Papierformat (IPP media keyword)"
-            default ""
+            default "jpn_hagaki_100x148mm"
             help
                 Leer lassen = Drucker-Standard. Gueltige Werte zeigt
                 "media-supported" in der Ausgabe von ipp_get_printer_attributes().
