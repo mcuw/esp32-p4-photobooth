@@ -2,7 +2,7 @@ menu "IPP Client"
 
     config IPP_PRINTER_HOST
         string "Drucker IP / Hostname"
-        default "192.168.50.200"
+        default "192.168.0.20"
 
     config IPP_PRINTER_PORT
         int "IPP Port"
