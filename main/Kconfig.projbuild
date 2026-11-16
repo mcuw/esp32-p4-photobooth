@@ -1,0 +1,44 @@
+menu "Photobooth"
+
+    config PHOTOBOOTH_WIFI_SSID
+        string "WLAN SSID"
+        default ""
+
+    config PHOTOBOOTH_WIFI_PASSWORD
+        string "WLAN Passwort"
+        default ""
+
+    config PHOTOBOOTH_PRINT_TEST
+        bool "Beim Start test.jpg drucken"
+        default n
+        help
+            Aus: es wird nur der Druckerstatus abgefragt.
+
+    menu "Drucker (IPP)"
+
+        config IPP_PRINTER_HOST
+            string "Drucker IP / Hostname"
+            default "192.168.0.200"
+
+        config IPP_PRINTER_PORT
+            int "IPP Port"
+            default 631
+            range 1 65535
+
+        config IPP_PRINTER_PATH
+            string "IPP Pfad"
+            default "/ipp/print"
+            help
+                Bei Canon Selphy meist /ipp/print. Falls der Drucker
+                nicht antwortet, Pfad per "ipptool" pruefen.
+
+        config IPP_MEDIA
+            string "Papierformat (IPP media keyword)"
+            default "jpn_hagaki_100x148mm"
+            help
+                Leer lassen = Drucker-Standard. Gueltige Werte zeigt
+                "media-supported" in der Ausgabe von ipp_get_printer_attributes().
+
+    endmenu
+
+endmenu

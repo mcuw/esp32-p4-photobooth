@@ -1,0 +1,4 @@
+## WLAN laeuft beim ESP32-P4 ueber den ESP32-C6 (ESP-Hosted / SDIO).
+dependencies:
+  espressif/esp_wifi_remote: "*"
+  espressif/esp_hosted: "*"
